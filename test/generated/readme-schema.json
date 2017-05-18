@@ -1,0 +1,23 @@
+{
+  "schema.product": {
+    "tracks": {
+      "type": {
+        "schema.sequence": {
+          "type": {
+            "schema.string": {}
+          }
+        }
+      }
+    },
+    "title": {
+      "type": {
+        "schema.string": {}
+      }
+    },
+    "artist": {
+      "type": {
+        "schema.string": {}
+      }
+    }
+  }
+}

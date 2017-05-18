@@ -1,0 +1,85 @@
+name:          plate
+version:       0.1.0
+synopsis:      An experimental attempt at principled schemas
+homepage:      https://github.com/plate/plate
+author:        Ian Grant Jeffries
+maintainer:    ian@housejeffries.com
+build-type:    Simple
+cabal-version: >=1.10
+
+library
+  hs-source-dirs:
+    src
+  default-language: Haskell2010
+  default-extensions:
+    DeriveFunctor
+    DeriveGeneric
+    FlexibleContexts
+    FlexibleInstances
+    GeneralizedNewtypeDeriving
+    NoImplicitPrelude
+    OverloadedStrings
+    ScopedTypeVariables
+    StrictData
+    TupleSections
+  ghc-options:
+    -Wall
+  exposed-modules:
+    Plate
+    Plate.Schema
+    Plate.Validation
+    Plate.Value
+    PlateExamples
+  other-modules:
+    Plate.Prelude
+  build-depends:
+      base
+    , aeson
+    , bytestring
+    , containers
+    , hashable
+    , microlens
+    , profunctors
+    , protolude
+    , QuickCheck
+    , scientific
+    , text
+    , unordered-containers
+    , vector
+
+test-suite test
+  hs-source-dirs:
+    test
+  main-is: Test.hs
+  other-modules:
+    Test.SimplePlate
+    Test.Validation
+  default-language: Haskell2010
+  default-extensions:
+    DeriveFunctor
+    DeriveGeneric
+    FlexibleContexts
+    FlexibleInstances
+    GeneralizedNewtypeDeriving
+    NoImplicitPrelude
+    OverloadedStrings
+    ScopedTypeVariables
+    StrictData
+    TupleSections
+  type: exitcode-stdio-1.0
+  ghc-options:
+    -Wall
+  build-depends:
+      base
+    , aeson
+    , aeson-pretty
+    , bytestring
+    , plate
+    , protolude
+    , QuickCheck
+    , tasty
+    , tasty-hunit
+    , tasty-quickcheck
+    , text
+    , unordered-containers
+    , vector

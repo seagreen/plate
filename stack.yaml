@@ -1,0 +1,6 @@
+resolver: lts-8.10
+extra-deps:
+  - aeson-1.1.1.0
+nix:
+  enable: true
+  shell-file: shell.nix

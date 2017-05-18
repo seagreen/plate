@@ -1,0 +1,267 @@
+[
+  [
+    "string",
+    {
+      "type": {
+        "schema.sum": {
+          "string": {
+            "type": {
+              "schema.sequence": {
+                "type": {
+                  "schema.integer": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  [
+    "bool",
+    {
+      "type": {
+        "schema.sum": {
+          "false": {
+            "type": {
+              "schema.product": {}
+            }
+          },
+          "true": {
+            "type": {
+              "schema.product": {}
+            }
+          }
+        }
+      }
+    }
+  ],
+  [
+    "maybe",
+    {
+      "abstraction": {
+        "body": {
+          "type": {
+            "schema.sum": {
+              "just": {
+                "variable": "a"
+              },
+              "nothing": {
+                "type": {
+                  "schema.product": {}
+                }
+              }
+            }
+          }
+        },
+        "parameter": "a"
+      }
+    }
+  ],
+  [
+    "either",
+    {
+      "abstraction": {
+        "body": {
+          "abstraction": {
+            "body": {
+              "type": {
+                "schema.sum": {
+                  "left": {
+                    "variable": "a"
+                  },
+                  "right": {
+                    "variable": "b"
+                  }
+                }
+              }
+            },
+            "parameter": "b"
+          }
+        },
+        "parameter": "a"
+      }
+    }
+  ],
+  [
+    "sequence",
+    {
+      "abstraction": {
+        "body": {
+          "type": {
+            "schema.sum": {
+              "nil": {
+                "type": {
+                  "schema.product": {}
+                }
+              },
+              "cons": {
+                "variable": "b"
+              }
+            }
+          }
+        },
+        "parameter": "a"
+      }
+    }
+  ],
+  [
+    "dictionary",
+    {
+      "abstraction": {
+        "body": {
+          "abstraction": {
+            "body": {
+              "application": {
+                "function": {
+                  "variable": "sequence"
+                },
+                "argument": {
+                  "application": {
+                    "function": {
+                      "application": {
+                        "function": {
+                          "variable": "tuple2"
+                        },
+                        "argument": {
+                          "variable": "k"
+                        }
+                      }
+                    },
+                    "argument": {
+                      "variable": "v"
+                    }
+                  }
+                }
+              }
+            },
+            "parameter": "v"
+          }
+        },
+        "parameter": "k"
+      }
+    }
+  ],
+  [
+    "tuple2",
+    {
+      "abstraction": {
+        "body": {
+          "abstraction": {
+            "body": {
+              "type": {
+                "schema.product": {
+                  "1": {
+                    "variable": "a"
+                  },
+                  "2": {
+                    "variable": "b"
+                  }
+                }
+              }
+            },
+            "parameter": "b"
+          }
+        },
+        "parameter": "a"
+      }
+    }
+  ],
+  [
+    "expression",
+    {
+      "type": {
+        "schema.sum": {
+          "application": {
+            "type": {
+              "schema.product": {
+                "function": {
+                  "variable": "expression"
+                },
+                "argument": {
+                  "variable": "expression"
+                }
+              }
+            }
+          },
+          "variable": {
+            "type": {
+              "schema.string": {}
+            }
+          },
+          "type": {
+            "variable": "schema"
+          },
+          "abstraction": {
+            "type": {
+              "schema.product": {
+                "body": {
+                  "variable": "expression"
+                },
+                "parameter": {
+                  "type": {
+                    "schema.string": {}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  [
+    "schema",
+    {
+      "type": {
+        "schema.sum": {
+          "schema.sum": {
+            "type": {
+              "schema.primative": {
+                "variable": "expression"
+              }
+            }
+          },
+          "schema.product": {
+            "type": {
+              "schema.primative": {
+                "variable": "expression"
+              }
+            }
+          },
+          "schema.string": {
+            "type": {
+              "schema.product": {}
+            }
+          },
+          "schema.primative": {
+            "variable": "expression"
+          },
+          "schema.dictionary": {
+            "type": {
+              "schema.product": {
+                "values": {
+                  "variable": "expression"
+                },
+                "keys": {
+                  "variable": "expression"
+                }
+              }
+            }
+          },
+          "schema.set": {
+            "variable": "expression"
+          },
+          "schema.sequence": {
+            "variable": "expression"
+          },
+          "schema.integer": {
+            "type": {
+              "schema.product": {}
+            }
+          }
+        }
+      }
+    }
+  ]
+]

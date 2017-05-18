@@ -1,0 +1,95 @@
+[
+  {
+    "invalid": [
+      true,
+      "abc"
+    ],
+    "type": {
+      "application": {
+        "function": {
+          "abstraction": {
+            "body": {
+              "variable": "a"
+            },
+            "parameter": "a"
+          }
+        },
+        "argument": {
+          "type": {
+            "schema.integer": {}
+          }
+        }
+      }
+    },
+    "valid": [
+      123
+    ]
+  },
+  {
+    "invalid": [
+      true
+    ],
+    "type": {
+      "application": {
+        "function": {
+          "abstraction": {
+            "body": {
+              "variable": "list"
+            },
+            "parameter": "list"
+          }
+        },
+        "argument": {
+          "application": {
+            "function": {
+              "abstraction": {
+                "body": {
+                  "type": {
+                    "schema.sum": {
+                      "nil": {
+                        "type": {
+                          "schema.product": {}
+                        }
+                      },
+                      "cons": {
+                        "type": {
+                          "schema.product": {
+                            "1": {
+                              "variable": "a"
+                            },
+                            "2": {
+                              "variable": "list"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "parameter": "a"
+              }
+            },
+            "argument": {
+              "type": {
+                "schema.integer": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "valid": [
+      {
+        "nil": {}
+      },
+      {
+        "cons": {
+          "1": 123,
+          "2": {
+            "nil": {}
+          }
+        }
+      }
+    ]
+  }
+]

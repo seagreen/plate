@@ -1,0 +1,120 @@
+[
+  {
+    "invalid": [
+      true,
+      "foo"
+    ],
+    "type": {
+      "type": {
+        "schema.integer": {}
+      }
+    },
+    "valid": [
+      -1,
+      0,
+      1,
+      2
+    ]
+  },
+  {
+    "invalid": [
+      true,
+      {
+        "foo": null
+      },
+      {
+        "foo": "bar"
+      },
+      {}
+    ],
+    "type": {
+      "type": {
+        "schema.product": {
+          "foo": {
+            "type": {
+              "schema.integer": {}
+            }
+          }
+        }
+      }
+    },
+    "valid": [
+      {
+        "foo": 123
+      },
+      {
+        "foo": 123,
+        "bar": "baz"
+      }
+    ]
+  },
+  {
+    "invalid": [
+      {
+        "foo": 123
+      },
+      {
+        "foo": 123,
+        "bar": "baz"
+      }
+    ],
+    "type": {
+      "type": {
+        "schema.product": {
+          "foo": {
+            "type": {
+              "schema.integer": {}
+            }
+          },
+          "bar": {
+            "type": {
+              "schema.integer": {}
+            }
+          }
+        }
+      }
+    },
+    "valid": [
+      {
+        "foo": 123,
+        "bar": 123
+      }
+    ]
+  },
+  {
+    "invalid": [
+      {
+        "foo": 123
+      },
+      {
+        "foo": {
+          "bar": "baz"
+        }
+      }
+    ],
+    "type": {
+      "type": {
+        "schema.product": {
+          "foo": {
+            "type": {
+              "schema.product": {
+                "bar": {
+                  "type": {
+                    "schema.integer": {}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "valid": [
+      {
+        "foo": {
+          "bar": 123
+        }
+      }
+    ]
+  }
+]
