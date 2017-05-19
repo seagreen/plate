@@ -34,3 +34,10 @@ Of those that can, not all Plate values can be described by Plate schemas. For i
 
 This is OK. There are an unlimited number of ways to contort values, a good type system can't cover all of them. Plate is meant to be used during the creation of new data types. It's not meant to describe existing ones retroactively.
 
+### + Comprehensive UI descriptions
+
+Plate is a schema language, not a DSL for UIs. We want it to be useful for generating UIs, but it would be impossible for Plate to describe everything that goes into a UI: font choices, background color, horizontal vs. vertical positioning, etc.
+
+At some point a line has to be drawn. I think the cleanest place to do this is to say that Plate will only include information that's relevent to validating data. This is enough to auto-generate simple UIs.
+
+In the future when our UI-generation tools become more sophisticated we can consider various "UI-specification-formats" to be used alongside of Plate schemas. They can describe nuances of UIs that can't be expressed in the schemas themselves.
