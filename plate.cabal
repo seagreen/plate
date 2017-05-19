@@ -4,6 +4,8 @@ synopsis:      An experimental attempt at principled schemas
 homepage:      https://github.com/plate/plate
 author:        Ian Grant Jeffries
 maintainer:    ian@housejeffries.com
+license:       MIT
+license-file:  ./misc/MIT-LICENSE.txt
 build-type:    Simple
 cabal-version: >=1.10
 
