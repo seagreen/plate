@@ -55,18 +55,18 @@ validateBuiltin
   -> Either Invalid ()
 validateBuiltin bound schema plate =
   case (schema, plate) of
-    (SumType st, PPrimative hm) -> do
+    (SumType st, PPrimitive hm) -> do
       when (HM.size hm /= 1) (Left (SumTypeSizeNotOne st hm))
       case HM.elems (HM.intersectionWith (,) st hm) of
         [(exp, p2)] -> validate bound exp p2
         _           -> Left (SumTypeNoMatch st hm)
-    (ProductType pt, PPrimative hm) -> do
+    (ProductType pt, PPrimitive hm) -> do
       let b = HM.intersectionWith (,) pt hm
       when (HM.size b < HM.size pt) (Left (MissingFields pt hm))
       traverse_
         (\(exp, p2) -> validate bound exp p2)
         (HM.elems b)
-    (SPrimative exp, PPrimative hm) -> traverse_ (validate bound exp) hm
+    (SPrimitive exp, PPrimitive hm) -> traverse_ (validate bound exp) hm
     (SInteger, PInteger _) -> pure ()
     (SSet exp, PSet xs) -> traverse_ (validate bound exp) xs
     (SDictionary exp1 exp2, PDictionary hm) ->

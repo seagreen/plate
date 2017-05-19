@@ -52,10 +52,10 @@ jsonTests =
   , testProperty "Expression/JSON isomorphism"
       (isomorphicJSON :: Expression -> Bool)
   , testCase "Special case for bool"
-      (toJSON (PPrimative (HM.singleton "bool" (PString "true")))
+      (toJSON (PPrimitive (HM.singleton "bool" (PString "true")))
         @?= Bool True)
   , testCase "Special case for maybe"
-      (toJSON (PPrimative (HM.singleton "nothing" (PDictionary mempty)))
+      (toJSON (PPrimitive (HM.singleton "nothing" (PDictionary mempty)))
         @?= Null)
   , testCase "Special case for dictionaries"
       (toJSON (PDictionary (HM.singleton (PInteger 1) (PString "foo")))

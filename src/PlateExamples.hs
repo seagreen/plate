@@ -98,11 +98,11 @@ schema =
         ])))
     , ("schema.sequence", Variable expressionRef)
     , ("schema.string", Builtin (ProductType mempty))
-    , ("schema.primative", Variable expressionRef)
+    , ("schema.primitive", Variable expressionRef)
     ])
   where
     sumOrProduct :: Expression
-    sumOrProduct = Builtin (SPrimative (Variable expressionRef))
+    sumOrProduct = Builtin (SPrimitive (Variable expressionRef))
 
 exampleLibrary :: [(Text, Expression)]
 exampleLibrary =

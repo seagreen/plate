@@ -34,7 +34,7 @@ album = ProductType (HM.fromList
   ])
 
 interstellarSoundtrack :: Plate
-interstellarSoundtrack = PPrimative (HM.fromList
+interstellarSoundtrack = PPrimitive (HM.fromList
   [ ("title", PString "Interstellar: Original Motion Picture Soundtrack")
   , ("artist", PString "Hans Zimmer")
   , ("tracks", PSequence (V.fromList

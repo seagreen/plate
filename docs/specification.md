@@ -36,7 +36,7 @@ And so we do.
 
 Plate values are made up of:
 
-1. Primatives (the `Map String Value` mentioned earlier).
+1. Primitives (the `Map String Value` mentioned earlier).
 
 2. Integers
 
@@ -69,7 +69,7 @@ data Schema
   | SDictionary Expression Expression
   | SSequence   Expression
   | SString
-  | SPrimative  Expression
+  | SPrimitive  Expression
   -- ^ Treat a sum/product type as a dictionary instead of as code.
   --
   -- This is only recommended for special cases, such as when
@@ -109,11 +109,11 @@ schema =
         ])))
     , ("schema.sequence", Variable expressionRef)
     , ("schema.string", Builtin (ProductType mempty))
-    , ("schema.primative", Variable expressionRef)
+    , ("schema.primitive", Variable expressionRef)
     ])
   where
     sumOrProduct :: Expression
-    sumOrProduct = Builtin (SPrimative (Variable expressionRef))
+    sumOrProduct = Builtin (SPrimitive (Variable expressionRef))
 ```
 
 ### 3. Validation
@@ -134,13 +134,13 @@ That said, we hope to prevent fragmentation as much as possible by provided well
 
 At the moment though only one is provided: a mapping between Plate values and JSON. You can see how its implemented in the `ToJSON` and `FromJSON` instances of [Plate.Value](../src/Plate/Value.hs).
 
-Notably, it maps Plate primatives (`Map String Value`s) to JSON objects, and Plate dictionaries to JSON arrays. This because Plate dictionaries don't work as JSON objects since the latter requires keys to be JSON strings.
+Notably, it maps Plate primitives (`Map String Value`s) to JSON objects, and Plate dictionaries to JSON arrays. This because Plate dictionaries don't work as JSON objects since the latter requires keys to be JSON strings.
 
 This idea came from [Microsoft Bond](https://microsoft.github.io/bond/) which is a fantastic schema language itself (though it doesn't have sum types).
 
 So for example the following Plate value:
 ```haskell
-PPrimative (HM.singleton
+PPrimitive (HM.singleton
   "left" 
   (PDictionary (HM.fromList
     [ (PInteger 12, PString "Invalid for reason foo")

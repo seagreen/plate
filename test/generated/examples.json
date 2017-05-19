@@ -217,14 +217,14 @@
         "schema.sum": {
           "schema.sum": {
             "type": {
-              "schema.primative": {
+              "schema.primitive": {
                 "variable": "expression"
               }
             }
           },
           "schema.product": {
             "type": {
-              "schema.primative": {
+              "schema.primitive": {
                 "variable": "expression"
               }
             }
@@ -233,9 +233,6 @@
             "type": {
               "schema.product": {}
             }
-          },
-          "schema.primative": {
-            "variable": "expression"
           },
           "schema.dictionary": {
             "type": {
@@ -253,6 +250,9 @@
             "variable": "expression"
           },
           "schema.sequence": {
+            "variable": "expression"
+          },
+          "schema.primitive": {
             "variable": "expression"
           },
           "schema.integer": {

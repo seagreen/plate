@@ -27,7 +27,7 @@ data Schema
   | SDictionary Expression Expression
   | SSequence   Expression
   | SString
-  | SPrimative  Expression
+  | SPrimitive  Expression
   -- ^ Treat a sum/product type as a dictionary instead of as code.
   --
   -- This is only recommended for special cases, such as when
@@ -36,20 +36,20 @@ data Schema
 
 instance ToPlate Expression where
   toPlate a =
-    PPrimative $ case a of
+    PPrimitive $ case a of
       Variable t -> HM.singleton "variable" (PString t)
 
       Abstraction t exp ->
         HM.singleton
           "abstraction"
-          (PPrimative (HM.fromList [ ("parameter", PString t)
+          (PPrimitive (HM.fromList [ ("parameter", PString t)
                                    , ("body", toPlate exp)
                                    ]))
 
       Application exp1 exp2 ->
         HM.singleton
           "application"
-          (PPrimative (HM.fromList [ ("function", toPlate exp1)
+          (PPrimitive (HM.fromList [ ("function", toPlate exp1)
                                    , ("argument", toPlate exp2)
                                    ]))
 
@@ -58,23 +58,23 @@ instance ToPlate Expression where
 instance FromPlate Expression where
   fromPlate plate =
     case plate of
-      (PPrimative hm) ->
+      (PPrimitive hm) ->
         case HM.toList hm of
           [("variable", a)]    -> Variable <$> fromPlate a
           [("abstraction", a)] -> parseAbstraction a
           [("application", a)] -> parseApplication a
           [("type", a)]        -> Builtin <$> fromPlate a
           _ -> Left "FromPlate Expression: No value constructor match"
-      _ -> Left "FromPlate Expression: Not a PPrimative"
+      _ -> Left "FromPlate Expression: Not a PPrimitive"
     where
-      parseAbstraction (PPrimative hm) =
+      parseAbstraction (PPrimitive hm) =
         Abstraction
           <$> (fromPlate =<< lkup "parameter" hm)
           <*> (fromPlate =<< lkup "body" hm)
       parseAbstraction _ =
         Left "FromPlate Expression: abstraction is not a sequence"
 
-      parseApplication (PPrimative hm) =
+      parseApplication (PPrimitive hm) =
         Application
           <$> (fromPlate =<< lkup "function" hm)
           <*> (fromPlate =<< lkup "argument" hm)
@@ -97,25 +97,25 @@ instance Arbitrary Expression where
 instance ToPlate Schema where
   toPlate a =
     case a of
-      SumType hm            -> f (PPrimative (toPlate <$> hm))
-      ProductType hm        -> f (PPrimative (toPlate <$> hm))
-      SInteger              -> f (PPrimative mempty)
+      SumType hm            -> f (PPrimitive (toPlate <$> hm))
+      ProductType hm        -> f (PPrimitive (toPlate <$> hm))
+      SInteger              -> f (PPrimitive mempty)
       SSet exp              -> f (toPlate exp)
-      SDictionary exp1 exp2 -> f (PPrimative (HM.fromList
+      SDictionary exp1 exp2 -> f (PPrimitive (HM.fromList
                                                [ ("keys", toPlate exp1)
                                                , ("values", toPlate exp2)
                                                ]))
       SSequence exp         -> f (toPlate exp)
-      SString               -> f (PPrimative mempty)
-      SPrimative exp        -> f (toPlate exp)
+      SString               -> f (PPrimitive mempty)
+      SPrimitive exp        -> f (toPlate exp)
     where
       f :: Plate -> Plate
-      f = PPrimative . HM.singleton ("schema." <> textFromSchema a)
+      f = PPrimitive . HM.singleton ("schema." <> textFromSchema a)
 
 instance FromPlate Schema where
   fromPlate plate =
     case plate of
-      (PPrimative hm) ->
+      (PPrimitive hm) ->
         case HM.toList hm of
           -- New value constructors share the same namespace as the builtin
           -- value constructors like @dictionary@, @set@, etc, so to
@@ -127,17 +127,17 @@ instance FromPlate Schema where
           [("schema.dictionary", a)] -> parseSDictionary a
           [("schema.sequence", a)]   -> SSequence <$> fromPlate a
           [("schema.string", a)]     -> parseSString a
-          [("schema.primative", a)]  -> SPrimative <$> fromPlate a
+          [("schema.primitive", a)]  -> SPrimitive <$> fromPlate a
           _ -> Left "FromPlate Schema: No value constructor match"
-      _ -> Left "FromPlate Schema: Not a PPrimative"
+      _ -> Left "FromPlate Schema: Not a PPrimitive"
     where
-      parseSumType (PPrimative hm) = SumType <$> traverse fromPlate hm
-      parseSumType _ = Left "FromPlate Schema: sum type not PPrimative"
+      parseSumType (PPrimitive hm) = SumType <$> traverse fromPlate hm
+      parseSumType _ = Left "FromPlate Schema: sum type not PPrimitive"
 
-      parseProductType (PPrimative hm) = ProductType <$> traverse fromPlate hm
-      parseProductType _ = Left "FromPlate Schema: product type not PPrimative"
+      parseProductType (PPrimitive hm) = ProductType <$> traverse fromPlate hm
+      parseProductType _ = Left "FromPlate Schema: product type not PPrimitive"
 
-      parseSDictionary (PPrimative hm) =
+      parseSDictionary (PPrimitive hm) =
         SDictionary
           <$> (fromPlate =<< lkup "keys" hm)
           <*> (fromPlate =<< lkup "values" hm)
@@ -148,17 +148,17 @@ instance FromPlate Schema where
       lkup t hm =
         maybeToRight ("FromPlate Schema: not found: " <> t) (HM.lookup t hm)
 
-      parseSInteger (PPrimative hm)
+      parseSInteger (PPrimitive hm)
         | null hm   = pure SInteger
         | otherwise = fail "SInteger contents must be empty"
       parseSInteger _ =
-        Left "FromPlate Schema: SInteger contents not PPrimative"
+        Left "FromPlate Schema: SInteger contents not PPrimitive"
 
-      parseSString (PPrimative hm)
+      parseSString (PPrimitive hm)
         | null hm   = pure SString
         | otherwise = fail "SString contents must be empty"
       parseSString _ =
-        Left "FromPlate Schema: SString contents not PPrimative"
+        Left "FromPlate Schema: SString contents not PPrimitive"
 
 instance ToJSON Schema where
   toJSON = toJSON . toPlate
@@ -187,7 +187,7 @@ instance Arbitrary Schema where
           , SSequence
               <$> resize n' arbitrary
           , pure SString
-          , SPrimative
+          , SPrimitive
               <$> resize n' arbitrary
           ]
 
@@ -201,7 +201,7 @@ mapSchema f s =
     SDictionary exp1 exp2 -> SDictionary (f exp1) (f exp2)
     SSequence   exp       -> SSequence (f exp)
     SString               -> s
-    SPrimative  exp       -> SPrimative (f exp)
+    SPrimitive  exp       -> SPrimitive (f exp)
 
 parseJSONPlate :: FromPlate a => Value -> Parser a
 parseJSONPlate a = do
@@ -220,4 +220,4 @@ textFromSchema p =
     SDictionary _ _ -> "dictionary"
     SSequence _     -> "sequence"
     SString         -> "string"
-    SPrimative _    -> "primative"
+    SPrimitive _    -> "primitive"
