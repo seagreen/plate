@@ -54,6 +54,8 @@ test-suite test
     test
   main-is: Test.hs
   other-modules:
+    Test.ReadmeExamples
+    Test.Prelude
     Test.SimplePlate
     Test.Validation
   default-language: Haskell2010

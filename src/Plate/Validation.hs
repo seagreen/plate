@@ -1,7 +1,7 @@
 
 module Plate.Validation where
 
-import           Plate.Prelude hiding (evaluate, exp)
+import           Plate.Prelude hiding (evaluate, exp, replace)
 
 import qualified Data.HashMap.Strict as HM
 

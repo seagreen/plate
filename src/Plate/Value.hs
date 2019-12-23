@@ -6,7 +6,6 @@ import           Plate.Prelude hiding (evaluate, exp)
 import           Control.Monad (fail)
 import           Data.Aeson
 import           Data.Aeson.Types (Parser)
-import           Data.Hashable
 import qualified Data.HashMap.Strict as HM
 import           Data.HashSet (HashSet)
 import qualified Data.HashSet as HashSet
