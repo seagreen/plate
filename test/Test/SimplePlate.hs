@@ -1,10 +1,9 @@
 -- | A minimal description of Plate.
 --
 -- For a production implementation see the 'Plate' module.
-
 module Test.SimplePlate where
 
-import           Protolude hiding (exp)
+import Protolude hiding (exp)
 
 --------------------------------------------------
 -- * Plate Abstract Data Types

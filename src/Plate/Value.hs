@@ -1,17 +1,16 @@
-
 module Plate.Value where
 
-import           Plate.Prelude hiding (evaluate, exp)
+import Control.Monad (fail)
+import Data.Aeson
+import Data.Aeson.Types (Parser)
+import Data.HashSet (HashSet)
+import Plate.Prelude hiding (evaluate, exp)
+import Test.QuickCheck
 
-import           Control.Monad (fail)
-import           Data.Aeson
-import           Data.Aeson.Types (Parser)
 import qualified Data.HashMap.Strict as HM
-import           Data.HashSet (HashSet)
 import qualified Data.HashSet as HashSet
 import qualified Data.Text as T
 import qualified Data.Vector as V
-import           Test.QuickCheck
 
 class ToPlate a where
   toPlate :: a -> Plate

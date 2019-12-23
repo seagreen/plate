@@ -1,23 +1,23 @@
-
 module Main where
 
-import           Test.Prelude hiding (evaluate, exp)
+import Data.Aeson
+import Plate
+import Test.Prelude hiding (evaluate, exp)
+import Test.Tasty
+import Test.Tasty.HUnit hiding (assert)
+import Test.Tasty.QuickCheck
+import Test.Validation
 
-import           Data.Aeson
+-- Just make sure it compiles:
+import Test.SimplePlate ()
+
 import qualified Data.Aeson as Aeson
 import qualified Data.ByteString as BS
 import qualified Data.HashMap.Strict as HM
 import qualified Data.Text as T
 import qualified Data.Vector as V
-import           Plate
 import qualified PlateExamples as PE
-import           Test.Tasty
-import           Test.Tasty.HUnit hiding (assert)
-import           Test.Tasty.QuickCheck
-
 import qualified Test.ReadmeExamples as ReadmeExamples
-import           Test.SimplePlate () -- Just make sure it compiles.
-import           Test.Validation
 
 main :: IO ()
 main = do

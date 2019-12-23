@@ -1,10 +1,9 @@
 -- | The first Plate library.
-
 module PlateExamples where
 
-import           Plate.Prelude hiding (bool, either, maybe, sequence)
+import Plate
+import Plate.Prelude hiding (bool, either, maybe, sequence)
 
-import           Plate
 import qualified Data.HashMap.Strict as HM
 
 unit :: Expression

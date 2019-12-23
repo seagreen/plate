@@ -1,12 +1,11 @@
-
 module Test.ReadmeExamples where
 
-import           Test.Prelude
+import Plate
+import Test.Prelude
 
 import qualified Data.ByteString as BS
 import qualified Data.HashMap.Strict as HM
 import qualified Data.Vector as V
-import           Plate
 
 write :: IO ()
 write = do

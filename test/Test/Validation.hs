@@ -1,11 +1,10 @@
-
 module Test.Validation where
 
-import           Protolude
+import Data.Aeson
+import Plate
+import Protolude
 
-import           Data.Aeson
 import qualified Data.HashMap.Strict as HM
-import           Plate
 
 data TestCase a = TestCase
   { _tgType    :: a

@@ -1,16 +1,14 @@
-
 module Plate.Schema where
 
-import           Plate.Prelude hiding (evaluate, exp)
+import Control.Monad (fail)
+import Data.Aeson
+import Data.Aeson.Types (Parser)
+import Plate.Prelude hiding (evaluate, exp)
+import Plate.Value
+import Test.QuickCheck
 
-import           Control.Monad (fail)
-import           Data.Aeson
-import           Data.Aeson.Types (Parser)
 import qualified Data.HashMap.Strict as HM
 import qualified Data.Text as T
-import           Test.QuickCheck
-
-import           Plate.Value
 
 data Expression
   = Variable    Text

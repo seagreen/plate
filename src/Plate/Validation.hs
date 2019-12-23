@@ -1,12 +1,10 @@
-
 module Plate.Validation where
 
-import           Plate.Prelude hiding (evaluate, exp, replace)
+import Plate.Prelude hiding (evaluate, exp, replace)
+import Plate.Schema
+import Plate.Value
 
 import qualified Data.HashMap.Strict as HM
-
-import           Plate.Schema
-import           Plate.Value
 
 data Invalid
   = VariableNotFound      Text
