@@ -20,7 +20,7 @@ This allows schemas to describe enormously complex structures for which it's imp
 
 The solution is to look for rescue from a related field. Language-specific type system writers have been feeling out the sweet spot of expressiveness longer than the other tools mentioned here have existed. Even better, many of them are battle-hardened and sit on a principled theoretical foundation.
 
-And of course the most glorious, battle-hardened, and principled of these is Haskell (OCaml and PureScript aren't bad either). Plate is what you get when you steal the most basic, essential features of Haskell's type system and build a schema language from them. Hopefully this lets Plate strike the right level of expressiveness for many tasks.
+And of course the most glorious, battle-hardened, and principled of these is Haskell. Plate is what you get when you steal the most basic, essential features of Haskell's type system and build a schema language from them. Hopefully this lets Plate strike the right level of expressiveness for many tasks.
 
 # Status
 
